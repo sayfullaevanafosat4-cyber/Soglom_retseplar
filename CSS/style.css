@@ -1,1 +1,393 @@
+/* Umumiy stillar */
+:root {
+    --primary-color: #28a745;
+    --secondary-color: #20c997;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+    --warning-color: #ffc107;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 76px;
+    background-color: #f8f9fa;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 50px;
+}
+
+.hero-section h1 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.feature-icon i {
+    color: white;
+}
+
+/* Category Cards */
+.category-card {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.category-card .card {
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .card {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Recipe Cards */
+.recipe-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.recipe-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.recipe-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.calorie-badge {
+    background: var(--warning-color);
+    color: var(--dark-color);
+}
+
+/* Calculator Styles */
+.calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 30px;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Image Upload Area */
+.image-upload-area {
+    border: 3px dashed #ddd;
+    border-radius: 15px;
+    padding: 50px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.image-upload-area:hover {
+    border-color: var(--primary-color);
+    background: #e8f5e9;
+}
+
+.image-upload-area i {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Progress Bar */
+.progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Profile Stats */
+.stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Admin Styles */
+.admin-sidebar {
+    background: var(--dark-color);
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.admin-sidebar .nav-link {
+    color: #ddd;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+    
+    .hero-section {
+        padding: 50px 0;
+        text-align: center;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .calculator-container {
+        padding: 20px;
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+}
+
+.toast {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-left: 5px solid var(--primary-color);
+}
+
+.toast.error {
+    border-left-color: #dc3545;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Button Styles */
+.btn-success {
+    background: var(--primary-color);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+}
+
+.btn-success:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline-success {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+}
+
+.btn-outline-success:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+/* Admin Access Styles */
+.btn-admin {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+    color: #000 !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+.admin-access-card {
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+    background: linear-gradient(135deg, #343a40, #212529);
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.admin-sidebar .nav-link {
+    color: #ddd;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    background: #28a745;
+    color: white;
+    border-left: 3px solid #ffc107;
+}
+
+/* Admin Dashboard */
+.admin-main {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.admin-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        min-height: auto;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        z-index: 1000;
+    }
+    
+    .admin-main {
+        margin-bottom: 60px;
+    }
+    
+    .btn-admin {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
