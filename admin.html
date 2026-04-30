@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sog'lom Ovqatlanish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        .admin-main {
+            padding: 20px;
+        }
+        .stat-card-admin {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .table-responsive {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .admin-welcome {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .admin-access-panel {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .admin-icon {
+            font-size: 60px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .access-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 admin-sidebar">
+                <div class="d-flex flex-column p-3">
+                    <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <i class="fas fa-apple-alt me-2"></i>
+                        <span class="fs-5">Admin Panel</span>
+                    </a>
+                    <hr class="text-white">
+                    <ul class="nav nav-pills flex-column mb-auto" id="admin-nav">
+                        <li class="nav-item">
+                            <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#users" class="nav-link" data-section="users">
+                                <i class="fas fa-users me-2"></i>
+                                Foydalanuvchilar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#recipes" class="nav-link" data-section="recipes">
+                                <i class="fas fa-utensils me-2"></i>
+                                Retseptlar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#add-recipe" class="nav-link" data-section="add-recipe">
+                                <i class="fas fa-plus-circle me-2"></i>
+                                Retsept qo'shish
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="text-white">
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link text-white">
+                                <i class="fas fa-home me-2"></i>
+                                Saytga qaytish
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 admin-main">
+                <!-- Welcome Section -->
+                <div class="admin-welcome">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="mb-2">Admin Panel</h1>
+                            <p class="mb-0">Sog'lom Ovqatlanish platformasini boshqarish paneli</p>
+                        </div>
+                        <div class="admin-status">
+                            <span class="badge bg-light text-success p-2">
+                                <i class="fas fa-user-shield me-1"></i>
+                                Admin rejimi faol
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="admin-section">
+                    <h2 class="mb-4">Dashboard</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card-admin">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-success bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-users fa-2x text-success"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="total-users">0</h4>
+                                        <p class="text-muted mb-0">Foydalanuvchilar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card-admin">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-utensils fa-2x text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="total-recipes">0</h4>
+                                        <p class="text-muted mb-0">Retseptlar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card-admin">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-info bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-bookmark fa-2x text-info"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="total-saved">0</h4>
+                                        <p class="text-muted mb-0">Saqlanganlar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card-admin">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-calculator fa-2x text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="total-calculations">0</h4>
+                                        <p class="text-muted mb-0">Hisob-kitoblar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="stat-card-admin">
+                                <h5>Oxirgi foydalanuvchilar</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Foydalanuvchi</th>
+                                                <th>Ro'yxatdan o'tgan sana</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recent-users">
+                                            <tr>
+                                                <td colspan="2" class="text-center text-muted">Yuklanmoqda...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stat-card-admin">
+                                <h5>Mashhur retseptlar</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Retsept</th>
+                                                <th>Kategoriya</th>
+                                                <th>Kaloriya</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="popular-recipes">
+                                            <tr>
+                                                <td colspan="3" class="text-center text-muted">Yuklanmoqda...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users-section" class="admin-section d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Foydalanuvchilar</h2>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                            <i class="fas fa-user-plus"></i> Yangi foydalanuvchi
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Foydalanuvchi nomi</th>
+                                    <th>Email</th>
+                                    <th>Ro'yxatdan o'tgan sana</th>
+                                    <th>Admin</th>
+                                    <th>Harakatlar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">Yuklanmoqda...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Recipes Section -->
+                <section id="recipes-section" class="admin-section d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Retseptlar</h2>
+                        <div class="d-flex gap-2">
+                            <select class="form-select w-auto" id="recipe-category-filter">
+                                <option value="all">Barcha kategoriyalar</option>
+                                <option value="taom">Taomlar</option>
+                                <option value="salad">Salatlar</option>
+                                <option value="ichimlik">Ichimliklar</option>
+                                <option value="smuzi">Smoothielar</option>
+                            </select>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRecipeModal">
+                                <i class="fas fa-plus"></i> Yangi retsept
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nomi</th>
+                                    <th>Kategoriya</th>
+                                    <th>Kaloriya</th>
+                                    <th>Tayyorlanish vaqti</th>
+                                    <th>Harakatlar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipes-table">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">Yuklanmoqda...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Add Recipe Section -->
+                <section id="add-recipe-section" class="admin-section d-none">
+                    <h2 class="mb-4">Yangi Retsept Qo'shish</h2>
+                    
+                    <form id="add-recipe-form">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="recipe-title" class="form-label">Retsept nomi *</label>
+                                    <input type="text" class="form-control" id="recipe-title" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-description" class="form-label">Qisqacha tavsif *</label>
+                                    <textarea class="form-control" id="recipe-description" rows="3" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-ingredients" class="form-label">Ingredientlar *</label>
+                                    <textarea class="form-control" id="recipe-ingredients" rows="5" required></textarea>
+                                    <div class="form-text">Har bir ingredientni yangi qatordan kiriting</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-instructions" class="form-label">Tayyorlash usuli *</label>
+                                    <textarea class="form-control" id="recipe-instructions" rows="5" required></textarea>
+                                    <div class="form-text">Har bir qadamni yangi qatordan kiriting</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="recipe-category" class="form-label">Kategoriya *</label>
+                                    <select class="form-select" id="recipe-category" required>
+                                        <option value="">Tanlang</option>
+                                        <option value="taom">Taom</option>
+                                        <option value="salad">Salat</option>
+                                        <option value="ichimlik">Ichimlik</option>
+                                        <option value="smuzi">Smoothie</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-calories" class="form-label">Kaloriya (100g)*</label>
+                                    <input type="number" class="form-control" id="recipe-calories" required min="0" step="0.1">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="recipe-prep-time" class="form-label">Tayyorlash vaqti (min)</label>
+                                        <input type="number" class="form-control" id="recipe-prep-time" min="0">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="recipe-cook-time" class="form-label">Pishirish vaqti (min)</label>
+                                        <input type="number" class="form-control" id="recipe-cook-time" min="0">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-servings" class="form-label">Portsiya soni</label>
+                                    <input type="number" class="form-control" id="recipe-servings" min="1" value="1">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="recipe-image" class="form-label">Rasm URL</label>
+                                    <input type="url" class="form-control" id="recipe-image" 
+                                           placeholder="https://example.com/image.jpg">
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="recipe-featured">
+                                    <label class="form-check-label" for="recipe-featured">Tanlangan retsept sifatida ko'rsatish</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-plus"></i> Retseptni qo'shish
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yangi foydalanuvchi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user-form">
+                        <div class="mb-3">
+                            <label for="new-username" class="form-label">Foydalanuvchi nomi</label>
+                            <input type="text" class="form-control" id="new-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="new-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-password" class="form-label">Parol</label>
+                            <input type="password" class="form-control" id="new-password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="new-admin">
+                            <label class="form-check-label" for="new-admin">Admin huquqlarini berish</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                    <button type="button" class="btn btn-success" id="save-user-btn">Saqlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Recipe Modal -->
+    <div class="modal fade" id="addRecipeModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yangi retsept qo'shish</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="modal-add-recipe-form">
+                        <!-- Form will be populated -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple Admin Manager
+        class AdminManager {
+            constructor() {
+                this.currentSection = 'dashboard';
+                this.init();
+            }
+
+            init() {
+                console.log('Admin Panel initialized');
+                
+                // Auto-set admin user
+                this.setAdminUser();
+                
+                // Setup navigation
+                this.setupNavigation();
+                
+                // Load dashboard
+                this.showSection('dashboard');
+            }
+
+            setAdminUser() {
+                // Create admin user if not exists
+                let users = JSON.parse(localStorage.getItem('healthy_food_users')) || [];
+                let adminUser = users.find(u => u.username === 'admin');
+                
+                if (!adminUser) {
+                    adminUser = {
+                        id: 1,
+                        username: 'admin',
+                        email: 'admin@soglomhayot.uz',
+                        password: 'admin123',
+                        created_at: new Date().toISOString(),
+                        is_admin: true,
+                        weight: 75,
+                        height: 175,
+                        age: 35,
+                        gender: 'male',
+                        activity_level: 'moderate',
+                        daily_calories: 2500
+                    };
+                    users.push(adminUser);
+                    localStorage.setItem('healthy_food_users', JSON.stringify(users));
+                }
+                
+                // Always set current user to admin
+                localStorage.setItem('current_user', JSON.stringify(adminUser));
+                console.log('Admin user set as current user');
+            }
+
+            setupNavigation() {
+                // Navigation links
+                document.querySelectorAll('.nav-link[data-section]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.getAttribute('data-section');
+                        
+                        // Update active link
+                        document.querySelectorAll('.nav-link').forEach(l => {
+                            l.classList.remove('active');
+                        });
+                        link.classList.add('active');
+                        
+                        // Show section
+                        this.showSection(section);
+                    });
+                });
+            }
+
+            showSection(section) {
+                // Hide all sections
+                document.querySelectorAll('.admin-section').forEach(sec => {
+                    sec.classList.add('d-none');
+                });
+
+                // Show selected section
+                const sectionElement = document.getElementById(`${section}-section`);
+                if (sectionElement) {
+                    sectionElement.classList.remove('d-none');
+                    this.currentSection = section;
+
+                    // Load section data
+                    switch(section) {
+                        case 'dashboard':
+                            this.loadDashboard();
+                            break;
+                        case 'users':
+                            this.loadUsers();
+                            break;
+                        case 'recipes':
+                            this.loadRecipes();
+                            break;
+                        case 'add-recipe':
+                            this.setupAddRecipeForm();
+                            break;
+                    }
+                }
+            }
+
+            loadDashboard() {
+                console.log('Loading dashboard...');
+                
+                // Get data
+                const users = JSON.parse(localStorage.getItem('healthy_food_users')) || [];
+                const recipes = JSON.parse(localStorage.getItem('healthy_food_recipes')) || [];
+                const savedRecipes = JSON.parse(localStorage.getItem('healthy_food_saved_recipes')) || [];
+                const consumedFoods = JSON.parse(localStorage.getItem('healthy_food_consumed_foods')) || [];
+
+                // Update stats
+                document.getElementById('total-users').textContent = users.length;
+                document.getElementById('total-recipes').textContent = recipes.length;
+                document.getElementById('total-saved').textContent = savedRecipes.length;
+                document.getElementById('total-calculations').textContent = consumedFoods.length;
+
+                // Recent users
+                const recentUsers = users
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .slice(0, 5);
+
+                const recentUsersContainer = document.getElementById('recent-users');
+                if (recentUsersContainer) {
+                    recentUsersContainer.innerHTML = recentUsers.map(user => `
+                        <tr>
+                            <td>
+                                <strong>${user.username}</strong>
+                                ${user.is_admin ? '<span class="badge bg-success ms-1">Admin</span>' : ''}
+                            </td>
+                            <td>${new Date(user.created_at).toLocaleDateString()}</td>
+                        </tr>
+                    `).join('');
+                }
+
+                // Popular recipes
+                const popularRecipes = recipes.slice(0, 5);
+                const popularRecipesContainer = document.getElementById('popular-recipes');
+                if (popularRecipesContainer) {
+                    popularRecipesContainer.innerHTML = popularRecipes.map(recipe => `
+                        <tr>
+                            <td>${recipe.title}</td>
+                            <td>${this.getCategoryName(recipe.category)}</td>
+                            <td>${recipe.calories} kcal</td>
+                        </tr>
+                    `).join('');
+                }
+            }
+
+            loadUsers() {
+                const users = JSON.parse(localStorage.getItem('healthy_food_users')) || [];
+                const usersTable = document.getElementById('users-table');
+                
+                if (usersTable) {
+                    usersTable.innerHTML = users.map(user => `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>
+                                <strong>${user.username}</strong>
+                                ${user.is_admin ? '<span class="badge bg-success ms-1">Admin</span>' : ''}
+                            </td>
+                            <td>${user.email}</td>
+                            <td>${new Date(user.created_at).toLocaleDateString()}</td>
+                            <td>
+                                ${user.is_admin ? 
+                                    '<span class="badge bg-success">Ha</span>' : 
+                                    '<span class="badge bg-secondary">Yo\'q</span>'}
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    ${user.id !== 1 ? `
+                                    <button class="btn btn-outline-danger delete-user-btn" data-id="${user.id}">
+                                        <i class="fas fa-trash"></i> O'chirish
+                                    </button>
+                                    ` : '<span class="text-muted">Asosiy admin</span>'}
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+
+                    // Add event listeners
+                    document.querySelectorAll('.delete-user-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const userId = parseInt(button.getAttribute('data-id'));
+                            this.deleteUser(userId);
+                        });
+                    });
+                }
+
+                // Add user form
+                document.getElementById('save-user-btn')?.addEventListener('click', () => {
+                    this.addNewUser();
+                });
+            }
+
+            deleteUser(userId) {
+                if (userId === 1) {
+                    alert('Asosiy admin hisobini o\'chirib bo\'lmaydi!');
+                    return;
+                }
+                
+                if (confirm('Foydalanuvchini o\'chirishni tasdiqlaysizmi?')) {
+                    let users = JSON.parse(localStorage.getItem('healthy_food_users')) || [];
+                    users = users.filter(u => u.id !== userId);
+                    localStorage.setItem('healthy_food_users', JSON.stringify(users));
+                    
+                    alert('Foydalanuvchi o\'chirildi');
+                    this.loadUsers();
+                }
+            }
+
+            addNewUser() {
+                const username = document.getElementById('new-username').value;
+                const email = document.getElementById('new-email').value;
+                const password = document.getElementById('new-password').value;
+                const isAdmin = document.getElementById('new-admin').checked;
+
+                if (!username || !email || !password) {
+                    alert('Iltimos, barcha maydonlarni to\'ldiring');
+                    return;
+                }
+
+                const users = JSON.parse(localStorage.getItem('healthy_food_users')) || [];
+                
+                // Check if username exists
+                if (users.find(u => u.username === username)) {
+                    alert('Bu foydalanuvchi nomi band');
+                    return;
+                }
+
+                const newUser = {
+                    id: Date.now(),
+                    username,
+                    email,
+                    password,
+                    created_at: new Date().toISOString(),
+                    is_admin: isAdmin,
+                    weight: 70,
+                    height: 170,
+                    age: 30,
+                    gender: 'male',
+                    activity_level: 'moderate',
+                    daily_calories: 2000
+                };
+
+                users.push(newUser);
+                localStorage.setItem('healthy_food_users', JSON.stringify(users));
+
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+                if (modal) modal.hide();
+                
+                // Reset form
+                document.getElementById('add-user-form').reset();
+                
+                // Reload users
+                this.loadUsers();
+                alert('Foydalanuvchi qo\'shildi');
+            }
+
+            loadRecipes() {
+                const recipes = JSON.parse(localStorage.getItem('healthy_food_recipes')) || [];
+                const categoryFilter = document.getElementById('recipe-category-filter')?.value || 'all';
+
+                let filteredRecipes = recipes;
+                if (categoryFilter !== 'all') {
+                    filteredRecipes = recipes.filter(r => r.category === categoryFilter);
+                }
+
+                const recipesTable = document.getElementById('recipes-table');
+                if (recipesTable) {
+                    recipesTable.innerHTML = filteredRecipes.map(recipe => `
+                        <tr>
+                            <td>${recipe.id}</td>
+                            <td>${recipe.title}</td>
+                            <td>${this.getCategoryName(recipe.category)}</td>
+                            <td>${recipe.calories} kcal</td>
+                            <td>${recipe.prep_time + recipe.cook_time} min</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-danger delete-recipe-btn" data-id="${recipe.id}">
+                                        <i class="fas fa-trash"></i> O'chirish
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+
+                    // Add event listeners
+                    document.querySelectorAll('.delete-recipe-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const recipeId = parseInt(button.getAttribute('data-id'));
+                            this.deleteRecipe(recipeId);
+                        });
+                    });
+                }
+
+                // Category filter
+                document.getElementById('recipe-category-filter')?.addEventListener('change', () => {
+                    this.loadRecipes();
+                });
+            }
+
+            deleteRecipe(recipeId) {
+                if (confirm('Retseptni o\'chirishni tasdiqlaysizmi?')) {
+                    let recipes = JSON.parse(localStorage.getItem('healthy_food_recipes')) || [];
+                    recipes = recipes.filter(r => r.id !== recipeId);
+                    localStorage.setItem('healthy_food_recipes', JSON.stringify(recipes));
+                    
+                    // Also remove from saved recipes
+                    let savedRecipes = JSON.parse(localStorage.getItem('healthy_food_saved_recipes')) || [];
+                    savedRecipes = savedRecipes.filter(sr => sr.recipe_id !== recipeId);
+                    localStorage.setItem('healthy_food_saved_recipes', JSON.stringify(savedRecipes));
+                    
+                    alert('Retsept o\'chirildi');
+                    this.loadRecipes();
+                }
+            }
+
+            setupAddRecipeForm() {
+                const form = document.getElementById('add-recipe-form');
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.addNewRecipe();
+                    });
+                }
+            }
+
+            addNewRecipe() {
+                const title = document.getElementById('recipe-title').value;
+                const description = document.getElementById('recipe-description').value;
+                const ingredients = document.getElementById('recipe-ingredients').value;
+                const instructions = document.getElementById('recipe-instructions').value;
+                const category = document.getElementById('recipe-category').value;
+                const calories = parseFloat(document.getElementById('recipe-calories').value);
+                const prep_time = parseInt(document.getElementById('recipe-prep-time').value) || 0;
+                const cook_time = parseInt(document.getElementById('recipe-cook-time').value) || 0;
+                const servings = parseInt(document.getElementById('recipe-servings').value) || 1;
+                const image_url = document.getElementById('recipe-image').value;
+                const is_featured = document.getElementById('recipe-featured').checked;
+
+                if (!title || !description || !ingredients || !instructions || !category || !calories) {
+                    alert('Iltimos, barcha majburiy maydonlarni to\'ldiring (*)');
+                    return;
+                }
+
+                const recipes = JSON.parse(localStorage.getItem('healthy_food_recipes')) || [];
+                const maxId = recipes.length > 0 ? Math.max(...recipes.map(r => r.id)) : 0;
+
+                const newRecipe = {
+                    id: maxId + 1,
+                    title,
+                    description,
+                    ingredients,
+                    instructions,
+                    category,
+                    calories,
+                    prep_time,
+                    cook_time,
+                    servings,
+                    image_url: image_url || 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                    is_featured,
+                    created_at: new Date().toISOString()
+                };
+
+                recipes.push(newRecipe);
+                localStorage.setItem('healthy_food_recipes', JSON.stringify(recipes));
+
+                // Reset form
+                form.reset();
+                
+                alert('Retsept qo\'shildi!');
+                
+                // Switch to recipes section
+                setTimeout(() => {
+                    this.showSection('recipes');
+                }, 500);
+            }
+
+            getCategoryName(category) {
+                const names = {
+                    'taom': 'Taom',
+                    'salad': 'Salat',
+                    'ichimlik': 'Ichimlik',
+                    'smuzi': 'Smoothie'
+                };
+                return names[category] || category;
+            }
+        }
+
+        // Initialize admin manager
+        let adminManager;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin page loaded');
+            adminManager = new AdminManager();
+            
+            // Auto-click to show dashboard
+            const dashboardLink = document.querySelector('[data-section="dashboard"]');
+            if (dashboardLink) {
+                dashboardLink.click();
+            }
+        });
+    </script>
+</body>
+</html>
