@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish - Sog'lom Ovqatlanish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="calculator-container">
+                    <div class="text-center mb-4">
+                        <a href="index.html" class="text-decoration-none">
+                            <h2 class="text-success">
+                                <i class="fas fa-apple-alt"></i> Sog'lom Hayot
+                            </h2>
+                        </a>
+                        <p class="text-muted">Yangi hisob yarating</p>
+                    </div>
+
+                    <form id="register-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="username" class="form-label">
+                                    <i class="fas fa-user"></i> Foydalanuvchi nomi *
+                                </label>
+                                <input type="text" class="form-control" id="username" required>
+                                <div class="form-text">Kamida 3 ta belgi</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope"></i> Email manzil *
+                                </label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password" class="form-label">
+                                    <i class="fas fa-lock"></i> Parol *
+                                </label>
+                                <input type="password" class="form-control" id="password" required>
+                                <div class="form-text">Kamida 6 ta belgi</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="confirm-password" class="form-label">
+                                    <i class="fas fa-lock"></i> Parolni tasdiqlash *
+                                </label>
+                                <input type="password" class="form-control" id="confirm-password" required>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h5>Shaxsiy ma'lumotlar (ixtiyoriy)</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="age" class="form-label">Yosh</label>
+                                <input type="number" class="form-control" id="age" min="10" max="100">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="weight" class="form-label">Og'irlik (kg)</label>
+                                <input type="number" class="form-control" id="weight" min="30" max="200" step="0.1">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="height" class="form-label">Bo'y (sm)</label>
+                                <input type="number" class="form-control" id="height" min="100" max="250">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="gender" class="form-label">Jins</label>
+                                <select class="form-select" id="gender">
+                                    <option value="">Tanlang</option>
+                                    <option value="male">Erkak</option>
+                                    <option value="female">Ayol</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="activity" class="form-label">Faollik darajasi</label>
+                                <select class="form-select" id="activity">
+                                    <option value="sedentary">Kam harakatli</option>
+                                    <option value="light" selected>O'rtacha</option>
+                                    <option value="moderate">Faol</option>
+                                    <option value="active">Juda faol</option>
+                                    <option value="very_active">Sportchi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                    Foydalanish shartlari</a> bilan tanishdim va roziman
+                            </label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus"></i> Ro'yxatdan o'tish
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <p>Allaqachon hisobingiz bormi? 
+                                <a href="login.html">Kirish</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Foydalanish shartlari</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Platformamizdan foydalanish uchun quyidagi shartlarga rozilik bildirishingiz kerak:</p>
+                    <ul>
+                        <li>Ma'lumotlaringiz aniq va to'g'ri bo'lishi kerak</li>
+                        <li>Platformani noqonuniy maqsadlarda foydalanmaslik</li>
+                        <li>Boshqa foydalanuvchilarni bezovta qilmaslik</li>
+                        <li>Ma'lumotlaringiz maxfiyligi kafolatlangan</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                showToast('Parollar mos kelmadi!', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showToast('Parol kamida 6 ta belgidan iborat bo\'lishi kerak!', 'error');
+                return;
+            }
+            
+            try {
+                const user = db.registerUser(username, email, password);
+                
+                // Save additional info
+                const age = document.getElementById('age').value;
+                const weight = document.getElementById('weight').value;
+                const height = document.getElementById('height').value;
+                const gender = document.getElementById('gender').value;
+                const activity = document.getElementById('activity').value;
+                
+                if (age || weight || height || gender || activity) {
+                    const updates = {};
+                    if (age) updates.age = parseInt(age);
+                    if (weight) updates.weight = parseFloat(weight);
+                    if (height) updates.height = parseFloat(height);
+                    if (gender) updates.gender = gender;
+                    if (activity) updates.activity_level = activity;
+                    
+                    db.updateUser(user.id, updates);
+                }
+                
+                showToast('Muvaffaqiyatli ro\'yxatdan o\'tdingiz!', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+                
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        });
+    </script>
+</body>
+</html>

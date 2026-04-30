@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retseptlar - Sog'lom Ovqatlanish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-apple-alt"></i> Sog'lom Hayot
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home"></i> Bosh Sahifa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="recipes.html">
+                            <i class="fas fa-utensils"></i> Retseptlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calculator.html">
+                            <i class="fas fa-calculator"></i> Kalkulyator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="saved.html">
+                            <i class="fas fa-bookmark"></i> Saqlanganlar
+                        </a>
+                    </li>
+                    <li class="nav-item" id="auth-links">
+                        <!-- Auth links will be loaded by JavaScript -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Recipe Header -->
+    <section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover;">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4 text-center">Sog'lom Retseptlar</h1>
+            <p class="lead text-center mb-4">500+ ta turli kategoriyalardagi sog'lom va mazali retseptlar</p>
+            
+            <!-- Category Filters -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <button class="btn btn-outline-light category-btn active" data-category="all">
+                            <i class="fas fa-th"></i> Barchasi
+                        </button>
+                        <button class="btn btn-outline-light category-btn" data-category="taom">
+                            <i class="fas fa-drumstick-bite"></i> Taomlar
+                        </button>
+                        <button class="btn btn-outline-light category-btn" data-category="salad">
+                            <i class="fas fa-leaf"></i> Salatlar
+                        </button>
+                        <button class="btn btn-outline-light category-btn" data-category="ichimlik">
+                            <i class="fas fa-glass-whiskey"></i> Ichimliklar
+                        </button>
+                        <button class="btn btn-outline-light category-btn" data-category="smuzi">
+                            <i class="fas fa-blender"></i> Smoothielar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipes Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text bg-success text-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" id="recipe-search" 
+                               placeholder="Retsept nomi yoki ingredientlar bo'yicha qidirish...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-end">
+                        <select class="form-select w-auto" id="sort-recipes">
+                            <option value="newest">Yangi</option>
+                            <option value="oldest">Eski</option>
+                            <option value="calories-low">Kaloriya (past)</option>
+                            <option value="calories-high">Kaloriya (yuqori)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4" id="recipes-grid">
+                <!-- Recipes will be loaded by JavaScript -->
+            </div>
+
+            <div class="text-center mt-5" id="load-more-container">
+                <button class="btn btn-success" id="load-more-btn">
+                    <i class="fas fa-plus"></i> Ko'proq retsept yuklash
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <p class="text-center mb-0">&copy; 2024 Sog'lom Hayot. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        class RecipeManager {
+            constructor() {
+                this.currentCategory = 'all';
+                this.currentSearch = '';
+                this.currentSort = 'newest';
+                this.currentPage = 1;
+                this.pageSize = 9;
+                this.allRecipes = [];
+            }
+
+            loadRecipes() {
+                this.allRecipes = db.getAllRecipes();
+                this.filterAndDisplay();
+            }
+
+            filterAndDisplay() {
+                let filtered = [...this.allRecipes];
+
+                // Apply category filter
+                if (this.currentCategory !== 'all') {
+                    filtered = filtered.filter(recipe => recipe.category === this.currentCategory);
+                }
+
+                // Apply search filter
+                if (this.currentSearch) {
+                    const searchTerm = this.currentSearch.toLowerCase();
+                    filtered = filtered.filter(recipe => 
+                        recipe.title.toLowerCase().includes(searchTerm) ||
+                        recipe.description.toLowerCase().includes(searchTerm) ||
+                        recipe.ingredients.toLowerCase().includes(searchTerm)
+                    );
+                }
+
+                // Apply sorting
+                filtered.sort((a, b) => {
+                    switch(this.currentSort) {
+                        case 'newest':
+                            return b.id - a.id;
+                        case 'oldest':
+                            return a.id - b.id;
+                        case 'calories-low':
+                            return a.calories - b.calories;
+                        case 'calories-high':
+                            return b.calories - a.calories;
+                        default:
+                            return 0;
+                    }
+                });
+
+                // Pagination
+                const startIndex = 0; // For simplicity, show all
+                const endIndex = this.currentPage * this.pageSize;
+                const displayedRecipes = filtered.slice(0, endIndex);
+
+                this.displayRecipes(displayedRecipes);
+
+                // Show/hide load more button
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                if (loadMoreBtn) {
+                    loadMoreBtn.style.display = endIndex < filtered.length ? 'block' : 'none';
+                }
+            }
+
+            displayRecipes(recipes) {
+                const container = document.getElementById('recipes-grid');
+                if (!container) return;
+
+                container.innerHTML = recipes.map(recipe => `
+                    <div class="col-md-4">
+                        <div class="recipe-card">
+                            <div class="position-relative">
+                                <img src="${recipe.image_url}" alt="${recipe.title}" class="recipe-img">
+                                <span class="recipe-badge">${this.getCategoryName(recipe.category)}</span>
+                                <span class="recipe-badge calorie-badge" style="top: 45px;">
+                                    ${recipe.calories} kcal
+                                </span>
+                                ${auth.isLoggedIn() ? `
+                                <button class="btn btn-sm btn-light save-recipe-icon" 
+                                        data-id="${recipe.id}"
+                                        style="position: absolute; bottom: 10px; right: 10px;">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                                ` : ''}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${recipe.title}</h5>
+                                <p class="card-text text-muted">${recipe.description}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock"></i> ${recipe.prep_time + recipe.cook_time} min
+                                        </small>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-users"></i> ${recipe.servings} kishi
+                                        </small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-success view-recipe-btn" 
+                                            data-id="${recipe.id}">
+                                        <i class="fas fa-eye"></i> Ko'rish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Add event listeners
+                document.querySelectorAll('.view-recipe-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const recipeId = parseInt(this.getAttribute('data-id'));
+                        viewRecipe(recipeId);
+                    });
+                });
+
+                document.querySelectorAll('.save-recipe-icon').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const recipeId = parseInt(this.getAttribute('data-id'));
+                        db.saveRecipe(auth.currentUser.id, recipeId);
+                        showToast('Retsept saqlandi!', 'success');
+                        this.innerHTML = '<i class="fas fa-bookmark text-success"></i>';
+                    });
+                });
+            }
+
+            getCategoryName(category) {
+                const names = {
+                    'taom': 'Taom',
+                    'salad': 'Salat',
+                    'ichimlik': 'Ichimlik',
+                    'smuzi': 'Smoothie'
+                };
+                return names[category] || category;
+            }
+
+            loadMore() {
+                this.currentPage++;
+                this.filterAndDisplay();
+            }
+        }
+
+        // Initialize recipe manager
+        const recipeManager = new RecipeManager();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthLinks();
+            recipeManager.loadRecipes();
+
+            // Category filter buttons
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update category and reload recipes
+                    recipeManager.currentCategory = this.getAttribute('data-category');
+                    recipeManager.currentPage = 1;
+                    recipeManager.filterAndDisplay();
+                });
+            });
+
+            // Search input
+            document.getElementById('recipe-search')?.addEventListener('input', function() {
+                recipeManager.currentSearch = this.value;
+                recipeManager.currentPage = 1;
+                recipeManager.filterAndDisplay();
+            });
+
+            // Sort select
+            document.getElementById('sort-recipes')?.addEventListener('change', function() {
+                recipeManager.currentSort = this.value;
+                recipeManager.filterAndDisplay();
+            });
+
+            // Load more button
+            document.getElementById('load-more-btn')?.addEventListener('click', function() {
+                recipeManager.loadMore();
+            });
+
+            // Check URL for category parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryParam = urlParams.get('category');
+            if (categoryParam && ['taom', 'salad', 'ichimlik', 'smuzi'].includes(categoryParam)) {
+                recipeManager.currentCategory = categoryParam;
+                
+                // Activate corresponding button
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-category') === categoryParam) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                recipeManager.filterAndDisplay();
+            }
+        });
+    </script>
+</body>
+</html>

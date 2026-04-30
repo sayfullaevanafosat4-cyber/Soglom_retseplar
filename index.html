@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sog'lom Ovqatlanish Platformasi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-apple-alt"></i> Sog'lom Hayot
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home"></i> Bosh Sahifa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recipes.html">
+                            <i class="fas fa-utensils"></i> Retseptlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calculator.html">
+                            <i class="fas fa-calculator"></i> Kalkulyator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="saved.html">
+                            <i class="fas fa-bookmark"></i> Saqlanganlar
+                        </a>
+                    </li>
+                    <li class="nav-item" id="auth-links">
+                        <!-- Auth links will be loaded by JavaScript -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Sog'lom Ovqatlanish - Sog'lom Hayot</h1>
+                    <p class="lead mb-4">Eng sara retseptlar, kaloriya hisobi va shaxsiy ovqatlanish rejasi bilan sog'ligingizni nazorat qiling</p>
+                    <div class="d-flex gap-3">
+                        <a href="recipes.html" class="btn btn-light btn-lg">
+                            <i class="fas fa-utensils"></i> Retseptlarni Ko'rish
+                        </a>
+                        <a href="calculator.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-calculator"></i> Kaloriya Hisobi
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                         alt="Sog'lom ovqat" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Bizning Imkoniyatlarimiz</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-camera fa-3x text-success"></i>
+                        </div>
+                        <h4>Rasm orqali Tahlil</h4>
+                        <p>Ovqat rasmini yuklab, uning kaloriyasini aniqlang</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-utensil-spoon fa-3x text-success"></i>
+                        </div>
+                        <h4>500+ Retsept</h4>
+                        <p>Turli kategoriyalardagi sog'lom retseptlar</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-chart-line fa-3x text-success"></i>
+                        </div>
+                        <h4>Kaloriya Nazorati</h4>
+                        <p>Kunlik kaloriya iste'molingizni kuzatib boring</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-user-shield fa-3x text-success"></i>
+                        </div>
+                        <h4>Shaxsiy Akkaunt</h4>
+                        <p>Retseptlarni saqlang va shaxsiy reja yarating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Recipes -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Tanlangan Retseptlar</h2>
+                <a href="recipes.html" class="btn btn-outline-success">Barchasini Ko'rish</a>
+            </div>
+            <div class="row g-4" id="featured-recipes">
+                <!-- Recipes will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-5 bg-success text-white">
+        <div class="container">
+            <h2 class="text-center mb-5">Kategoriyalar</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <a href="recipes.html?category=taom" class="category-card">
+                        <div class="card bg-light text-dark h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-drumstick-bite fa-3x mb-3 text-success"></i>
+                                <h4>Taomlar</h4>
+                                <p>Asosiy ovqatlar</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="recipes.html?category=salad" class="category-card">
+                        <div class="card bg-light text-dark h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-leaf fa-3x mb-3 text-success"></i>
+                                <h4>Salatlar</h4>
+                                <p>Vitaminli salatlar</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="recipes.html?category=ichimlik" class="category-card">
+                        <div class="card bg-light text-dark h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-glass-whiskey fa-3x mb-3 text-success"></i>
+                                <h4>Ichimliklar</h4>
+                                <p>Sog'lom ichimliklar</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="recipes.html?category=smuzi" class="category-card">
+                        <div class="card bg-light text-dark h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-blender fa-3x mb-3 text-success"></i>
+                                <h4>Smoothielar</h4>
+                                <p>Energiya beruvchi</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Sog'lom Hayot</h5>
+                    <p>Sog'ligingizni yaxshilash uchun eng yaxshi retseptlar va vositalar</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Tezkor Havolalar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">Bosh Sahifa</a></li>
+                        <li><a href="recipes.html" class="text-white-50">Retseptlar</a></li>
+                        <li><a href="calculator.html" class="text-white-50">Kalkulyator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Aloqa</h5>
+                    <p><i class="fas fa-envelope"></i> info@soglomhayot.uz</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <p class="text-center mb-0">&copy; 2024 Sog'lom Hayot. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Load featured recipes
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFeaturedRecipes();
+            updateAuthLinks();
+        });
+    </script>
+</body>
+</html>
